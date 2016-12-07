@@ -1,0 +1,7 @@
+[Activity]
+name = Arrays
+bundle_id = org.laptop.Arrays
+icon = activity-icon
+exec = sugar-activity activity.ArrayActivity
+activity_version = 1
+show_launcher = yes
