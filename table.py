@@ -75,7 +75,19 @@ class Table(Gtk.HBox):
                 pass
 
     def get_values(self):
+        self.get_values_from_entries()
         return self.values
+
+    def get_values_from_entries(self):
+        del self.values
+        self.values = []
+
+        for x in range(0, self.size[0]):
+            self.values.append([])
+
+            for y in range(0, self.size[1]):
+                entry = self.get_entry_from_coords(x, y)
+                self.values[x].append(entry.get_value())
 
     def get_entry_from_coords(self, x, y):
         return self.boxes[x][y]

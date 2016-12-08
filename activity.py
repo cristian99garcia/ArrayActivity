@@ -25,6 +25,7 @@ class ArrayActivity(activity.Activity):
         self.set_canvas(self.canvas)
 
         self.label_size = Gtk.Label("Width: 0\nHeight: 0")
+        self.label_sum = Gtk.Label("")
 
         self.make_toolbar()
 
@@ -54,6 +55,16 @@ class ArrayActivity(activity.Activity):
         item.add(self.label_size)
         toolbarbox.toolbar.insert(item, -1)
 
+        toolbarbox.toolbar.insert(make_separator(False), -1)
+
+        sum_button = ToolButton("list-add")
+        sum_button.connect("clicked", self._on_sum)
+        toolbarbox.toolbar.insert(sum_button, -1)
+
+        item = Gtk.ToolItem()
+        item.add(self.label_sum)
+        toolbarbox.toolbar.insert(item, -1)
+
         toolbarbox.toolbar.insert(make_separator(True), -1)
 
         stop_button = StopButton(self)
@@ -66,10 +77,15 @@ class ArrayActivity(activity.Activity):
     def _on_add_row(self, widget):
         self.canvas.add_row()
         self.update_label_size()
+        self.label_sum.set_label("")
 
     def _on_add_column(self, widget):
         self.canvas.add_column()
         self.update_label_size()
+        self.label_sum.set_label("")
+
+    def _on_sum(self, widget):
+        self.label_sum.set_label(str(sum(self.canvas.get_simple_value_list())))
 
     def update_label_size(self):
         size = tuple(self.canvas.get_size())

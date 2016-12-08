@@ -69,6 +69,16 @@ class Canvas(Gtk.VBox):
     def get_size(self):
         return self.table.size
 
+    def get_simple_value_list(self):
+        list = []
+        values = self.get_values()
+
+        for x in range(0, len(values)):
+            for y in values[x]:
+                list.append(y)
+
+        return list
+
 
 if __name__ == "__main__":
     win = Gtk.Window()
